@@ -4,4 +4,5 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-chafa = { package = "libchafa", path = "libchafa" }
+chafa = { path = "chafa" }
+wgpu = "26.0.1"
