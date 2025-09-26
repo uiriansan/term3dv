@@ -1,4 +1,4 @@
-use crate::ffi;
+use crate::{CanvasMode, Passthrough, PixelMode, ffi};
 
 pub struct TermInfo {
     pub raw: *mut ffi::ChafaTermInfo,
@@ -23,6 +23,23 @@ impl TermInfo {
             Err("Chafa -> Failed to create TermInfo")
         } else {
             Ok(Self { raw })
+        }
+    }
+
+    pub fn get_best_canvas_mode(&self) -> CanvasMode {
+        unsafe { CanvasMode::from(ffi::chafa_term_info_get_best_canvas_mode(self.raw)) }
+    }
+
+    pub fn get_best_pixel_mode(&self) -> PixelMode {
+        unsafe { PixelMode::from(ffi::chafa_term_info_get_best_pixel_mode(self.raw)) }
+    }
+
+    pub fn get_is_pixel_passthrough_needed(&self, pixel_mode: PixelMode) -> Passthrough {
+        unsafe {
+            Passthrough::from(ffi::chafa_term_info_get_is_pixel_passthrough_needed(
+                self.raw,
+                pixel_mode as u32,
+            ) as u32)
         }
     }
 }

@@ -5,4 +5,5 @@ edition = "2024"
 
 [dependencies]
 chafa = { path = "chafa" }
+crossterm = "0.29.0"
 wgpu = "26.0.1"
